@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
+  <script>
+    const setHtmlFontSize = () => {
+      const htmlDom = document.getElementsByTagName('html')[0];
+      let htmlWidth =
+        document.documentElement.clientWidth || document.body.clientWidth;
+      if (htmlWidth >= 750) {
+        htmlWidth = 750;
+      }
+      if (htmlWidth <= 320) {
+        htmlWidth = 320;
+      }
+      // 我们想让1rem = 10px 设计搞宽度是375， 那么让实际的页面宽度 / 37.5 就可以得到 1rem = 10px 的换算关系来
+      htmlDom.style.fontSize = `${htmlWidth / 75}px`;
+      console.log(htmlDom.style.fontSize);
+    };
+    window.onresize = setHtmlFontSize;
+    setHtmlFontSize();
+  </script>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
